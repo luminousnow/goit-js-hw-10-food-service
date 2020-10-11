@@ -16,7 +16,8 @@ refs.switcher.addEventListener("change", onThemeSwitcherChange)
 
 /* створити розмітку картки товару використовуючи шаблонізатор */
 /* вивести список продуктів */
-/* запис параметрів в localStorage */
+
+/* запис параметрів Теми в localStorage */
 savedTheme()
 function onThemeSwitcherChange(evt) {
     // console.log(evt.target.checked);
@@ -26,11 +27,11 @@ function onThemeSwitcherChange(evt) {
         localStorage.setItem("Theme", refs.body.classList.value)
     }else{refs.body.classList.add(Theme.LIGHT)
         refs.body.classList.remove(Theme.DARK)
-        localStorage.setItem("Theme", refs.body.classList.value);}
+        localStorage.setItem("Theme", refs.body.classList.value);
+    }
 }    
-
-console.log(refs.switcher.value);
-
+    
+    
 function savedTheme() {
     const theme = localStorage.getItem("Theme")
 

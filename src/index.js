@@ -10,28 +10,35 @@ const refs = {
     body: document.querySelector("body"),
     switcher: document.querySelector(".theme-switch__toggle")
 } 
-/* Коли вимикач в положенні "сонце" - додати на БОДІ клас лайт, 
-коли на "місяць" - dark - theme */
-
-/* створити розмітку картки товару використовуючи шаблонізатор */
-
-/* вивести список продуктів */
-
-
-/* запис параметрів в localStorage */
-
-console.log(refs.body);
+/* Змінює фон. Додає відповідний клас на body 
+в залежності від положення вимикача */
 refs.switcher.addEventListener("change", onThemeSwitcherChange)
 
+/* створити розмітку картки товару використовуючи шаблонізатор */
+/* вивести список продуктів */
+/* запис параметрів в localStorage */
+savedTheme()
 function onThemeSwitcherChange(evt) {
-    console.log(evt.target.checked);
+    // console.log(evt.target.checked);
     if (evt.target.checked) {
         refs.body.classList.add(Theme.DARK)
         refs.body.classList.remove(Theme.LIGHT)
+        localStorage.setItem("Theme", refs.body.classList.value)
     }else{refs.body.classList.add(Theme.LIGHT)
-        refs.body.classList.remove(Theme.DARK)}
+        refs.body.classList.remove(Theme.DARK)
+        localStorage.setItem("Theme", refs.body.classList.value);}
 }    
 
+console.log(refs.switcher.value);
+
+function savedTheme() {
+    const theme = localStorage.getItem("Theme")
+
+    if (theme) {
+        refs.body.classList.add(theme)
+        refs.switcher.checked = theme === Theme.DARK;
+    }
+}
 
 // const menuElementMarkup = createMenu(obj);
 

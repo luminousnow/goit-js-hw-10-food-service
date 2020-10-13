@@ -1,4 +1,6 @@
-// import menuList from "../menu.json";
+import cardTpl from "../src/templates/menu-card.hbs";
+import menuList from './menu.json';
+
 
 const Theme = {
   LIGHT: 'light-theme',
@@ -15,25 +17,28 @@ const refs = {
 refs.switcher.addEventListener("change", onThemeSwitcherChange)
 
 /* створити розмітку картки товару використовуючи шаблонізатор */
-/* вивести список продуктів */
+const menuElementMarkup = createMenu(menuList);
 
-/* запис параметрів Теми в localStorage */
+/* вивести список продуктів */
+refs.menu.insertAdjacentHTML("afterbegin", menuElementMarkup)
+
+/* запис в localStorage */
 savedTheme()
 function onThemeSwitcherChange(evt) {
     // console.log(evt.target.checked);
     if (evt.target.checked) {
         refs.body.classList.add(Theme.DARK)
         refs.body.classList.remove(Theme.LIGHT)
-        localStorage.setItem("Theme", refs.body.classList.value)
+        localStorage.setItem("theme", refs.body.classList.value)
     }else{refs.body.classList.add(Theme.LIGHT)
         refs.body.classList.remove(Theme.DARK)
-        localStorage.setItem("Theme", refs.body.classList.value);
+        localStorage.setItem("theme", refs.body.classList.value);
     }
 }    
     
     
 function savedTheme() {
-    const theme = localStorage.getItem("Theme")
+    const theme = localStorage.getItem("theme")
 
     if (theme) {
         refs.body.classList.add(theme)
@@ -41,25 +46,8 @@ function savedTheme() {
     }
 }
 
-// const menuElementMarkup = createMenu(obj);
 
-// // 1. Створює розмітку по масиву даних і наданому шаблону.
-// function createImagesCollection(obj) {
-//   return obj
-//     .map(({ preview, original, description }) => {
-//       return `<li class="gallery__item">
-//             <a
-//             class="gallery__link"
-//             href="${original}"
-//             >
-//                 <img
-//                     class="gallery__image"
-//                     src="${preview}"
-//                     data-source="${original}"
-//                     alt="${description}"
-//                 />
-//             </a>
-//         </li>`;
-//     })
-//     .join('');
-// }
+// Створює розмітку по масиву даних і наданому шаблону.
+function createMenu(obj) {
+  return obj.map(cardTpl).join('');
+}

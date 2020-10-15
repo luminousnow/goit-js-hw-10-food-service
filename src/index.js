@@ -1,29 +1,32 @@
 import cardTpl from "../src/templates/menu-card.hbs";
 import menuList from './menu.json';
 
-
+// константи
 const Theme = {
   LIGHT: 'light-theme',
   DARK: 'dark-theme',
 };
 
+// доступ до елементів
 const refs = {
     menu: document.querySelector(".js-menu"),
     body: document.querySelector("body"),
     switcher: document.querySelector(".theme-switch__toggle")
 } 
-/* Змінює фон. Додає відповідний клас на body 
-в залежності від положення вимикача */
+
+// Змінює фон в залежності від положення вимикача
 refs.switcher.addEventListener("change", onThemeSwitcherChange)
 
-/* створити розмітку картки товару використовуючи шаблонізатор */
+// Створює розмітку картки товару використовуючи шаблонізатор
 const menuElementMarkup = createMenu(menuList);
 
-/* вивести список продуктів */
+// вивести список продуктів
 refs.menu.insertAdjacentHTML("afterbegin", menuElementMarkup)
 
-/* запис в localStorage */
+// запис представлення теми в localStorage
 savedTheme()
+
+// functions
 function onThemeSwitcherChange(evt) {
     // console.log(evt.target.checked);
     if (evt.target.checked) {
@@ -35,8 +38,7 @@ function onThemeSwitcherChange(evt) {
         localStorage.setItem("theme", refs.body.classList.value);
     }
 }    
-    
-    
+      
 function savedTheme() {
     const theme = localStorage.getItem("theme")
 
@@ -46,8 +48,7 @@ function savedTheme() {
     }
 }
 
-
-// Створює розмітку по масиву даних і наданому шаблону.
+// Створює розмітку по масиву даних і наданому шаблону через map
 function createMenu(obj) {
   return obj.map(cardTpl).join('');
 }

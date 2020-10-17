@@ -14,19 +14,15 @@ const refs = {
     switcher: document.querySelector(".theme-switch__toggle")
 } 
 
-// Змінює фон в залежності від положення вимикача
 refs.switcher.addEventListener("change", onThemeSwitcherChange)
-
-// Створює розмітку картки товару використовуючи шаблонізатор
 const menuElementMarkup = createMenu(menuList);
-
-// вивести список продуктів
+// виводить список продуктів
 refs.menu.insertAdjacentHTML("afterbegin", menuElementMarkup)
 
-// запис представлення теми в localStorage
 savedTheme()
 
 // functions
+// Змінює фон в залежності від положення вимикача
 function onThemeSwitcherChange(evt) {
     // console.log(evt.target.checked);
     if (evt.target.checked) {
@@ -46,6 +42,7 @@ function onThemeSwitcherChange(evt) {
     }
 }    
       
+// відновлення останньої теми з localStorage, якщо така була
 function savedTheme() {
     const theme = localStorage.getItem("theme")
 
@@ -60,10 +57,9 @@ function createMenu(obj) {
   return obj.map(cardTpl).join('');
 }
 
-
-const changeTheme = (currentTheme, oldTheme) => {
+// змінює тему, запис теми в localStorage
+function changeTheme(currentTheme, oldTheme) {
     refs.body.classList.add(currentTheme);
     refs.body.classList.remove(oldTheme);
     localStorage.setItem("theme", currentTheme);
-    
 }

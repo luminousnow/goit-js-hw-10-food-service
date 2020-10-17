@@ -18,7 +18,6 @@ refs.switcher.addEventListener("change", onThemeSwitcherChange)
 const menuElementMarkup = createMenu(menuList);
 // виводить список продуктів
 refs.menu.insertAdjacentHTML("afterbegin", menuElementMarkup)
-
 savedTheme()
 
 // functions

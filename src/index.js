@@ -30,12 +30,19 @@ savedTheme()
 function onThemeSwitcherChange(evt) {
     // console.log(evt.target.checked);
     if (evt.target.checked) {
-        refs.body.classList.add(Theme.DARK)
-        refs.body.classList.remove(Theme.LIGHT)
-        localStorage.setItem("theme", refs.body.classList.value)
-    }else{refs.body.classList.add(Theme.LIGHT)
-        refs.body.classList.remove(Theme.DARK)
-        localStorage.setItem("theme", refs.body.classList.value);
+        // refs.body.classList.add(Theme.DARK)
+        // refs.body.classList.remove(Theme.LIGHT)
+        // localStorage.setItem("theme", Theme.DARK)
+
+        changeTheme(Theme.DARK, Theme.LIGHT)
+        
+        
+    } else {
+        // refs.body.classList.add(Theme.LIGHT);
+        // refs.body.classList.remove(Theme.DARK);
+        // localStorage.setItem("theme", Theme.LIGHT);
+
+        changeTheme(Theme.LIGHT, Theme.DARK)
     }
 }    
       
@@ -43,7 +50,7 @@ function savedTheme() {
     const theme = localStorage.getItem("theme")
 
     if (theme) {
-        refs.body.classList.add(theme)
+        refs.body.classList.add(theme);
         refs.switcher.checked = theme === Theme.DARK;
     }
 }
@@ -51,4 +58,12 @@ function savedTheme() {
 // Створює розмітку по масиву даних і наданому шаблону через map
 function createMenu(obj) {
   return obj.map(cardTpl).join('');
+}
+
+
+const changeTheme = (currentTheme, oldTheme) => {
+    refs.body.classList.add(currentTheme);
+    refs.body.classList.remove(oldTheme);
+    localStorage.setItem("theme", currentTheme);
+    
 }
